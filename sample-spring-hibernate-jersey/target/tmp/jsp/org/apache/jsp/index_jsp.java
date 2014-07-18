@@ -58,8 +58,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t<span class=\"navbar-brand\">AngularJS Dashboard </span>\n");
       out.write("\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t<ul class=\"nav navbar-nav navbar-right navbar-center\">\n");
-      out.write("\t\t\t\t\t\t<li class=\"active\"><a href=\"#/tagchart\">Tags</a></li>\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"#/questionchart\">Questions</a></li>\n");
+      out.write("\t\t\t\t\t\t<li class=\"active\"><a href=\"http://0.0.0.0:8080/#/tagchart\">Tags</a></li>\n");
+      out.write("\t\t\t\t\t\t<li><a href=\"http://0.0.0.0:8080/#/questionchart\">Questions</a></li>\n");
       out.write("\t\t\t\t\t</ul>\n");
       out.write("\t\t\t</div>\n");
       out.write("\t\t</div>\n");

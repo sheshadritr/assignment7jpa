@@ -20,12 +20,14 @@ wait for the google charting libs to be ready*/
         // I apply the remote data to the local scope.
         function applyRemoteData( newtags ) {
             $scope.tags = newtags.data;
-            console.log($scope.tags);
+            //console.log($scope.tags);
             
             $scope.tagsmap.dataTable.addColumn("string","TagName");
             $scope.tagsmap.dataTable.addColumn("number","TagCount");
-            for (var i=0; i<$scope.tags.length; i++)
-            	$scope.tagsmap.dataTable.addRow([$scope.tags[i].tagAssociated, $scope.tags[i].tagCount]);
+            for (var i=0; i<$scope.tags.length; i++) {
+            	if($scope.tags[i].tagAssociated != "angularjs" && $scope.tags[i].tagCount >= 10)
+            		$scope.tagsmap.dataTable.addRow([$scope.tags[i].tagAssociated, $scope.tags[i].tagCount]);
+            }
             $scope.tagsmap.title="Associate Tags Pie Chart";
 
         }
@@ -39,15 +41,19 @@ wait for the google charting libs to be ready*/
         }
 	}]);
 	
-	myApp.controller('QuestionController', ['$scope', 'viewService', function($scope, viewService) {
-
+	myApp.controller('QuestionController', ['$scope', 'viewService', 'answerService', 'questionService',
+	    function($scope, viewService, answerService, questionService) {
+		
+		/*
+		 * This part of controller provides data of Views vs Questions
+		 * */
 		$scope.view = {};
 		$scope.viewmap = {};
 		$scope.viewmap.dataTable = new google.visualization.DataTable();
-		loadRemoteData();
+		loadViewData();
 
 		// I apply the remote data to the local scope.
-		function applyRemoteData(newview) {
+		function applyViewData(newview) {
 			$scope.view = newview.data;
 			
 			$scope.viewmap.dataTable.addColumn("string", "Field");
@@ -56,27 +62,26 @@ wait for the google charting libs to be ready*/
 											  [ "Total Views", $scope.view.totalViews]
 			                                  ]);
 			$scope.viewmap.title = "Total Views Barchart";
-			//console.log($scope.viewmap);
 			
 		}
 
 		// I load the remote data from the server.
-		function loadRemoteData() {
+		function loadViewData() {
 			viewService.getViews().then(function(view) {
-				applyRemoteData(view);
+				applyViewData(view);
 			});
 		}
-	}]);
-	
-	myApp.controller('QuestionController', ['$scope', 'answerService', function($scope, answerService) {
-
+		
+		/*
+		 * This part of controller provides data of Answers vs Questions
+		 * */
 		$scope.answer = {};
 		$scope.answermap = {};
 		$scope.answermap.dataTable = new google.visualization.DataTable();
-		loadRemoteData();
+		loadAnswerData();
 
 		// I apply the remote data to the local scope.
-		function applyRemoteData(newanswer) {
+		function applyAnswerData(newanswer) {
 			$scope.answer = newanswer.data;
 			
 			$scope.answermap.dataTable.addColumn("string", "Field");
@@ -85,14 +90,43 @@ wait for the google charting libs to be ready*/
 											  [ "Total Answers", $scope.answer.totalAnswers]
 			                                  ]);
 			$scope.answermap.title = "Total Answers Barchart";
-			//console.log($scope.answermap);
 			
 		}
 
 		// I load the remote data from the server.
-		function loadRemoteData() {
+		function loadAnswerData() {
 			answerService.getAnswers().then(function(answer) {
-				applyRemoteData(answer);
+				applyAnswerData(answer);
+			});
+		}
+		
+		/*
+		 * This part of controller provides data of total no.of Questions over time
+		 * */
+		$scope.question = {};
+		$scope.questionmap = {};
+		$scope.questionmap.dataTable = new google.visualization.DataTable();
+		loadQuestionData();
+
+		// I apply the remote data to the local scope.
+		function applyQuestionData(newquestion) {
+			$scope.question = newquestion.data;
+			
+			$scope.questionmap.dataTable.addColumn("string", "CreatedYear");
+			$scope.questionmap.dataTable.addColumn("number", "NoOfQuestions");			
+            for (var i=0; i<$scope.question.length; i++)
+            {
+            	//console.log($scope.question[i].createdDate, $scope.question[i].questionCount);
+            	$scope.questionmap.dataTable.addRow([$scope.question[i].createdDate, $scope.question[i].questionCount]);
+            }
+			$scope.questionmap.title = "No.of Questions over-time";
+			
+		}
+
+		// I load the remote data from the server.
+		function loadQuestionData() {
+			questionService.getQuestions().then(function(question) {
+				applyQuestionData(question);
 			});
 		}
 	}]);

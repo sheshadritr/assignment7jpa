@@ -1,12 +1,10 @@
 package com.hashedin.model;
 
-import java.util.Date;
-
 
 public class QuestionCount {
 	
 	private Long noOfQuestions;
-	private Date createdDate;
+	private String createdDate;
 
 	public Long getQuestionCount() {
 		return noOfQuestions;
@@ -16,19 +14,17 @@ public class QuestionCount {
 		this.noOfQuestions = questionCount;
 	}
 
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	public QuestionCount(Date createdDate, Long questionCount) {
+	public QuestionCount(int createdDate, Long questionCount) {
 		super();
-		//SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		//this.createdDate = (Date) formatter.parse(formatter.format(createdDate));
-		this.createdDate = createdDate;
+		this.createdDate = String.valueOf(createdDate);
 		this.noOfQuestions = questionCount;
 	}
 

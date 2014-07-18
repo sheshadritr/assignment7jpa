@@ -1,8 +1,9 @@
 <div ng-controller="QuestionController">
-	<div class="container">
-		<div google-chart="ColumnChart" ng-model="viewmap" class="bigGraph"></div>
+	<div class="row container-fluid">
+		<div  google-chart="ColumnChart" ng-model="viewmap" class="largeGraph col-md-6"></div>
+		<div google-chart="ColumnChart" ng-model="answermap" class="largeGraph col-md-6"></div>
 	</div>
-	<div class="container">
-		<div google-chart="ColumnChart" ng-model="answermap" class="bigGraph"></div>
+	<div class="row container-fluid">
+		<div  google-chart="ColumnChart" ng-model="questionmap" class="extraLargeGraph col-md-12"></div>
 	</div>
 </div>

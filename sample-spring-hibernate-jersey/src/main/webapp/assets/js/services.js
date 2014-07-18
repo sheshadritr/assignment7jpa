@@ -53,3 +53,21 @@ module.service( 'answerService', ['$http', function( $http, $t ) {
 		return request;
 	}
 }]);
+
+module.service( 'questionService', ['$http', function( $http, $t ) {
+	// Return public API.
+	return ({
+		getQuestions : getQuestions,
+	});
+
+	function getQuestions() {
+		var request = $http({
+			method : "get",
+			url : "http://0.0.0.0:8080/api/questions/count",
+			params : {
+				action : "get"
+			}
+		});
+		return request;
+	}
+}]);

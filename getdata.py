@@ -30,11 +30,13 @@ def callSOAPI():
         questionlist = site.questions.tagged('angularjs').page(pagecount)
         for questionentry in questionlist:
             insert_question(dbcursor, questionentry)
-            dbconnection.commit()
             insert_tag(dbcursor, questionentry)
             dbconnection.commit()
         if not questionlist['has_more']:
             break
+
+    # Updates the value of coloumn named year, that corresponds to year of createdDate.
+    update_year(dbcursor)
 
     # commit transactions
     dbconnection.commit()
@@ -56,6 +58,7 @@ def create_questiontable(dbcursor):
             score int(10),
             lastActivityDate datetime NOT NULL,
             creationDate datetime NOT NULL,
+            year int(4) NOT NULL;
             PRIMARY KEY (questionId)
     ) ENGINE = INNODB"""
     dbcursor.execute(query)
@@ -110,6 +113,8 @@ def insert_tag(dbcursor, questionentry):
             query = """INSERT INTO tags(tagName, questionid_questionId) VALUES (%s, %s)"""
             dbcursor.execute(query, (tag, tqid))
 
+def update_year(dbcursor):
+	dbcursor.execute("""update question set year=YEAR(creationDate)""")
 
 callSOAPI()
 

@@ -1,6 +1,7 @@
 package com.hashedin.model;
 
 import java.util.Date;
+//import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,10 +19,11 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 @Entity
 @Table(name = "question")
 @NamedQueries({ @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
-	@NamedQuery(name = "Question.getDateWiseCount", query = "SELECT NEW com.hashedin.model.QuestionCount(q.creationDate, count(q)) FROM Question q GROUP BY q.creationDate"),
+	@NamedQuery(name = "Question.getDateWiseCount", query = "SELECT NEW com.hashedin.model.QuestionCount(q.year, count(q)) FROM Question q GROUP BY q.year"),
 	@NamedQuery(name = "Question.getViewSum", query = "SELECT NEW com.hashedin.model.QuestionView(count(q), sum(q.viewCount)) FROM Question q"),
 	@NamedQuery(name = "Question.getAnswerSum", query = "SELECT NEW com.hashedin.model.QuestionAnswers(count(q), sum(q.answerCount)) FROM Question q")
 })
+
 /*
  *
  * */
@@ -38,7 +40,15 @@ public class Question {
 	private Long score;
 	private Date lastActivityDate;
 	private Date creationDate;
-	
+	private int year;
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	@XmlInverseReference(mappedBy = "questionid")
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "questionid")
 	List<Tag> taglist;

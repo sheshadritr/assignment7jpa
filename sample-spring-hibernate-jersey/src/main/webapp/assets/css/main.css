@@ -13,11 +13,16 @@
 	float: left;
 }
 
-.bigGraph{
-	width:500px;
+.extraLargeGraph{
+	width:1200px;
 	height:500px;
 	float:left;
-	border: 1px bold black;
+}
+
+.largeGraph{
+	width:600px;
+	height:500px;
+	float:left;
 }
 
 .mediumGraph{
