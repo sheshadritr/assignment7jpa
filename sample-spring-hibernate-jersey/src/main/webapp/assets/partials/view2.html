@@ -1,0 +1,94 @@
+
+<div class="col-sm-12">
+<div  class="col-sm-5">
+ <ul style="list-style:none; padding:13px">
+ <li><h1 ng-bind="projectDetails.proName"></h1></li>
+ </ul>
+</div>
+<div class="col-sm-7">
+<ul class="nav nav-pills ">
+              <li><a href="#edit">Add collaborator </a></li>
+              <li><a ng-click="closeTask(task)">Create task</a></li>
+              <li><a ng-click="closeTask(task)">Create Project</a></li>
+            </ul>
+</div>
+</div> 
+
+<div class="col-sm-12">
+<div class="col-sm-2"><button type="button" class="btn btn-default" name="showAll" ng-click="prifilter={priority:''}">Show All</button></div>
+<div class="col-sm-3"><h3>Filter by Priority</h3></div>
+<div class="btn-group col-sm-4">
+<button type="button" class="btn btn-default" name="showStopper" ng-click="prifilter={priority:0}">Show stopper</button>
+<button type="button" class="btn btn-default" name="high" ng-click="prifilter={priority:1}">High</button>
+<button type="button" class="btn btn-default" name="medium" ng-click="prifilter={priority:2}">Medium</button>
+<button type="button" class="btn btn-default" name="low" ng-click="prifilter={priority:3}">Low</button>
+</div>
+
+<div class="col-sm-1"><strong>DueDate</strong></div>
+<div class="col-sm-2"><input type="date" name="dueDate"/></div>
+
+</div>
+
+<div class="col-sm-1-12" >
+
+<div class="col-sm-2"><h3>Coordinators</h3>
+<div ng-repeat="coordinators in projectDetails.proCoordinators">
+ <ul style="list-style:none; padding:13px">
+ <li><span ng-bind="coordinators | capitalize"></span></li>
+</ul>
+</div>
+</div>
+
+<div class="col-sm-10" >
+<div ng-repeat="tasks in projectDetails.task | filter:prifilter">
+
+    <div class="col-sm-3"><br><br><br>
+      <h1><span ng-class="{ 'glyphicon glyphicon-ok':tasks.isComplete,'glyphicon glyphicon-thumbs-down':tasks.isClosed,'glyphicon glyphicon-tint':tasks.isPending}"></span></h1>
+      <small>Pending</small>
+    </div>   
+     <div class="col-sm-9">
+        <div class="col-sm-5"><br><br><br>
+          <a href="#">
+            <span ng-bind="tasks.taskName"></span>
+          </a>
+          <p class="task-description" ng-bind="tasks.desc">
+          </p>
+        </div>
+        <div class="col-sm-4"><br><br><br>
+            <ul class="nav nav-pills ">
+              <li><a href="#edit">Edit</a></li>
+              <li><a ng-click="markComplete(task)">Complete</a></li>
+              <li><a ng-click="closeTask(task)">Close</a></li>
+            </ul>
+            <ul style="list-style:none; padding:13px">
+              <li>
+                <strong>Assign To:</strong>
+                &nbsp;
+                <span ng-bind="tasks.assignTo"></span>
+              </li>
+              <li>
+                <strong>Created At:</strong>
+                &nbsp;
+                <span ng-bind="tasks.createdAt"></span>
+              </li>
+              <li>
+                <strong>Due Date:</strong>
+                &nbsp;
+                <span ng-bind="tasks.dueDate"></span>
+              </li>
+              <li>
+                <strong>Closed On:</strong>
+                &nbsp;
+                <span ng-bind="tasks.closedOn"></span>
+             </li>
+              <li>
+                <strong>Priority :</strong>
+                &nbsp;
+                <span ng-bind="tasks.priority"></span>
+             </li>
+         </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
