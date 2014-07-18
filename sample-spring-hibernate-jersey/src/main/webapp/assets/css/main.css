@@ -37,3 +37,9 @@
 	float:left;
 }
 
+.chart-desc{
+	font-style: italic;
+	text-align: center;
+	width: 100%;
+	float: left;
+}

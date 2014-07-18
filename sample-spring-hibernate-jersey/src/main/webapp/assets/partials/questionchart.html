@@ -1,9 +1,19 @@
 <div ng-controller="QuestionController">
 	<div class="row container-fluid">
-		<div  google-chart="ColumnChart" ng-model="viewmap" class="largeGraph col-md-6"></div>
-		<div google-chart="ColumnChart" ng-model="answermap" class="largeGraph col-md-6"></div>
+		<div class="col-md-6">
+			<div  google-chart="ColumnChart" ng-model="viewmap" class="largeGraph"></div>
+			<h3 class="chart-desc">All-time no.of Questions v/s Views</h3>
+		</div>
+		<div  class="col-md-6">
+			<div google-chart="ColumnChart" ng-model="answermap" class="largeGraph"></div>
+			<h3 class="chart-desc">All-time no.of Questions v/s Answers</h3>
+		</div>
+		
 	</div>
 	<div class="row container-fluid">
-		<div  google-chart="PieChart" ng-model="questionmap" class="largeGraph col-md-12"></div>
+		<div  class="col-md-6">
+			<div  google-chart="PieChart" ng-model="questionmap" class="largeGraph"></div>
+			<h3 class="chart-desc">All-time no.of Questions grouped by year</h3>
+		</div>
 	</div>
 </div>
