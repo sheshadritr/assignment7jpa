@@ -1,11 +1,10 @@
 <div ng-controller="TagController">
-	<div class="row container">
+	<div class="row container chart-row">
 		<div  class="col-md-12">
-			<div google-chart="PieChart" ng-model="tagsmap" class="extraLargeGraph"></div>
 			<div class="chart-desc">
-				<h3>All-time distribution of Associated Tags</h3>
+				<h4>All-time distribution of Associated Tags</h4>
 			</div>
-			
+			<div google-chart="PieChart" ng-model="tagsmap" class="largeGraph tagchart"></div>
 		</div>
 	</div>
 </div>

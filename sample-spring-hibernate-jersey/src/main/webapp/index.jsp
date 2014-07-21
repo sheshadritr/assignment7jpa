@@ -15,8 +15,8 @@
 					<span class="navbar-brand">AngularJS Dashboard </span>
 				</div>
 					<ul class="nav navbar-nav navbar-right navbar-center">
-						<li class="active"><a href="http://0.0.0.0:8080/#/tagchart">Tags</a></li>
-						<li><a href="http://0.0.0.0:8080/#/questionchart">Questions</a></li>
+						<li class="active"><a class="white" href="http://0.0.0.0:8080/#/tagchart">Tags</a></li>
+						<li><a class="white" href="http://0.0.0.0:8080/#/questionchart">Questions</a></li>
 					</ul>
 			</div>
 		</div>

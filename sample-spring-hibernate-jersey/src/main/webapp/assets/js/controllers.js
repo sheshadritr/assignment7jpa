@@ -5,18 +5,19 @@ wait for the google charting libs to be ready*/
 	google.setOnLoadCallback(function () {  
 	    angular.bootstrap(document.body, ['myApp']);
 	});
-	google.load('visualization', '1', {packages: ['corechart']});
+	google.load('visualization', '1', {packages: ['corechart', 'controls']});
+	
 	var myApp = myApp || angular.module("myApp",["google-chart"]);
-
-
 	myApp = angular.module( "myApp.controllers", [] );
+	
+	
 	 // Controls the myApp.
 	myApp.controller('TagController', ['$scope', 'tagService', function( $scope, tagService ) {
 		$scope.tags = [];
 		$scope.tagsmap = {};
         $scope.tagsmap.dataTable = new google.visualization.DataTable();
-        loadRemoteData();        
-
+        loadRemoteData();
+        
         // I apply the remote data to the local scope.
         function applyRemoteData( newtags ) {
             $scope.tags = newtags.data;

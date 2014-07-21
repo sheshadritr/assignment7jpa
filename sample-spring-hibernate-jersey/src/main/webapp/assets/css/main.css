@@ -1,11 +1,11 @@
 
 
 /* ==========================================================================
-   Author's custom styles
+   Author's custom styles  9B9B9D #C2E0FF
    ========================================================================== */
 
 .navbar-bg{
-	background-color: #C2E0FF;
+	background-color: #75A3FF;
 }
 
 .navbar-brand-width{
@@ -15,12 +15,12 @@
 
 .extraLargeGraph{
 	width:1200px;
-	height:500px;
+	height:400px;
 	float:left;
 }
 
 .largeGraph{
-	width:600px;
+	width:500px;
 	height:500px;
 	float:left;
 }
@@ -37,9 +37,31 @@
 	float:left;
 }
 
+.tagchart{
+	margin-left: 250px;
+}
 .chart-desc{
 	font-style: italic;
 	text-align: center;
 	width: 100%;
 	float: left;
+}
+
+.chart-row{
+	margin-top: 60px;
+}
+
+.chart-position{
+	margin-left: 60px;
+}
+
+.pageContainer{
+	background-color: #9B9B9D;
+}
+
+body{
+	background-color: #EFF4FF;
+}
+.white{
+	color: #FFFFFF;
 }

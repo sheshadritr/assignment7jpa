@@ -1,94 +1,74 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
 
-<div class="col-sm-12">
-<div  class="col-sm-5">
- <ul style="list-style:none; padding:13px">
- <li><h1 ng-bind="projectDetails.proName"></h1></li>
- </ul>
-</div>
-<div class="col-sm-7">
-<ul class="nav nav-pills ">
-              <li><a href="#edit">Add collaborator </a></li>
-              <li><a ng-click="closeTask(task)">Create task</a></li>
-              <li><a ng-click="closeTask(task)">Create Project</a></li>
-            </ul>
-</div>
-</div> 
+      // Load the Visualization API and the controls package.
+      google.load('visualization', '1.0', {'packages':['controls']});
 
-<div class="col-sm-12">
-<div class="col-sm-2"><button type="button" class="btn btn-default" name="showAll" ng-click="prifilter={priority:''}">Show All</button></div>
-<div class="col-sm-3"><h3>Filter by Priority</h3></div>
-<div class="btn-group col-sm-4">
-<button type="button" class="btn btn-default" name="showStopper" ng-click="prifilter={priority:0}">Show stopper</button>
-<button type="button" class="btn btn-default" name="high" ng-click="prifilter={priority:1}">High</button>
-<button type="button" class="btn btn-default" name="medium" ng-click="prifilter={priority:2}">Medium</button>
-<button type="button" class="btn btn-default" name="low" ng-click="prifilter={priority:3}">Low</button>
-</div>
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawDashboard);
 
-<div class="col-sm-1"><strong>DueDate</strong></div>
-<div class="col-sm-2"><input type="date" name="dueDate"/></div>
+      // Callback that creates and populates a data table,
+      // instantiates a dashboard, a range slider and a pie chart,
+      // passes in the data and draws it.
+      function drawDashboard() {
 
-</div>
+        // Create our data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Name', 'Donuts eaten'],
+          ['Michael' , 5],
+          ['Elisa', 7],
+          ['Robert', 3],
+          ['John', 2],
+          ['Jessica', 6],
+          ['Aaron', 1],
+          ['Margareth', 8]
+        ]);
 
-<div class="col-sm-1-12" >
+        // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
 
-<div class="col-sm-2"><h3>Coordinators</h3>
-<div ng-repeat="coordinators in projectDetails.proCoordinators">
- <ul style="list-style:none; padding:13px">
- <li><span ng-bind="coordinators | capitalize"></span></li>
-</ul>
-</div>
-</div>
+        // Create a range slider, passing some options
+        var donutRangeSlider = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnLabel': 'Donuts eaten'
+          }
+        });
 
-<div class="col-sm-10" >
-<div ng-repeat="tasks in projectDetails.task | filter:prifilter">
+        // Create a pie chart, passing some options
+        var pieChart = new google.visualization.ChartWrapper({
+          'chartType': 'PieChart',
+          'containerId': 'chart_div',
+          'options': {
+            'width': 300,
+            'height': 300,
+            'pieSliceText': 'value',
+            'legend': 'right'
+          }
+        });
 
-    <div class="col-sm-3"><br><br><br>
-      <h1><span ng-class="{ 'glyphicon glyphicon-ok':tasks.isComplete,'glyphicon glyphicon-thumbs-down':tasks.isClosed,'glyphicon glyphicon-tint':tasks.isPending}"></span></h1>
-      <small>Pending</small>
-    </div>   
-     <div class="col-sm-9">
-        <div class="col-sm-5"><br><br><br>
-          <a href="#">
-            <span ng-bind="tasks.taskName"></span>
-          </a>
-          <p class="task-description" ng-bind="tasks.desc">
-          </p>
-        </div>
-        <div class="col-sm-4"><br><br><br>
-            <ul class="nav nav-pills ">
-              <li><a href="#edit">Edit</a></li>
-              <li><a ng-click="markComplete(task)">Complete</a></li>
-              <li><a ng-click="closeTask(task)">Close</a></li>
-            </ul>
-            <ul style="list-style:none; padding:13px">
-              <li>
-                <strong>Assign To:</strong>
-                &nbsp;
-                <span ng-bind="tasks.assignTo"></span>
-              </li>
-              <li>
-                <strong>Created At:</strong>
-                &nbsp;
-                <span ng-bind="tasks.createdAt"></span>
-              </li>
-              <li>
-                <strong>Due Date:</strong>
-                &nbsp;
-                <span ng-bind="tasks.dueDate"></span>
-              </li>
-              <li>
-                <strong>Closed On:</strong>
-                &nbsp;
-                <span ng-bind="tasks.closedOn"></span>
-             </li>
-              <li>
-                <strong>Priority :</strong>
-                &nbsp;
-                <span ng-bind="tasks.priority"></span>
-             </li>
-         </ul>
-        </div>
+        // Establish dependencies, declaring that 'filter' drives 'pieChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+        dashboard.bind(donutRangeSlider, pieChart);
+
+        // Draw the dashboard.
+        dashboard.draw(data);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      <div id="filter_div"></div>
+      <div id="chart_div"></div>
     </div>
-</div>
-</div>
-</div>
+  </body>
+</html>

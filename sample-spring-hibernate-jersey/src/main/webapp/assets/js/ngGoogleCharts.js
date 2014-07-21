@@ -12,7 +12,6 @@ googleChart.directive("googleChart",function(){
             if($scope[$attr.ngModel].title)
                 options.title = $scope[$attr.ngModel].title;
                 
-
             var googleChart = new google.visualization[$attr.googleChart]($elem[0]);
             googleChart.draw(dt,options);
             
@@ -20,7 +19,7 @@ googleChart.directive("googleChart",function(){
 			$scope.$watch(function() {
 				return $scope[$attr.ngModel].dataTable;
 			}, function(newValue) {
-				googleChart.draw($scope[$attr.ngModel].dataTable, options);
+				googleChart.draw(newValue, options);
 			}, true);
 
         }
