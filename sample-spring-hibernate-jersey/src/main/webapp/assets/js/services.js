@@ -9,7 +9,7 @@ module.service( 'tagService', ['$http', function( $http, $t ) {
 	function getTags() {
 		var request = $http({
 			method : "get",
-			url : "http://0.0.0.0:8080/api/tags/associated",
+			url : "/api/tags/associated",
 			params : {
 				action : "get"
 			}
@@ -27,7 +27,7 @@ module.service( 'viewService', ['$http', function( $http, $t ) {
 	function getViews() {
 		var request = $http({
 			method : "get",
-			url : "http://0.0.0.0:8080/api/questions/views",
+			url : "/api/questions/views",
 			params : {
 				action : "get"
 			}
